@@ -3,8 +3,10 @@ package javaproject1;
 public class main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		ShowInWeek s1 = new ShowInWeek();
+		AllShows a1 = new AllShows();
+		
+		System.out.println(a1.RandomSuggestion());
 	}
 
 }

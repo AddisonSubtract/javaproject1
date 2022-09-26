@@ -4,21 +4,23 @@ public class ShowInWeek {
 	
 	private String week;
 	private String category;
-	private int weeklyRank;
+	private String weeklyRank;
 	private String seasonTitle;
 	private int weeklyHours;
 	private int weeksInTop10;
+	private boolean purge;
 
 	public ShowInWeek() {
 		week = "not set";
 		category = "not set";
-		weeklyRank = 0;
+		weeklyRank = "not set";
 		seasonTitle = "not set";
 		weeklyHours = 0;
 		weeksInTop10 = 0;
+		purge = false;
 	}
 	
-	public ShowInWeek(String w, String c, int r, String t, int h, int i) {
+	public ShowInWeek(String w, String c, String r, String t, int h, int i) {
 		week = w;
 		category = c;
 		weeklyRank = r;
@@ -35,7 +37,7 @@ public class ShowInWeek {
 		category = c;
 	}
 	
-	public void setWeeklyRank(int r) {
+	public void setWeeklyRank(String r) {
 		weeklyRank = r;
 	}
 	
@@ -51,6 +53,10 @@ public class ShowInWeek {
 		weeksInTop10 = i;
 	}
 	
+	public void setPurge(boolean p) {
+		purge = p;
+	}
+	
 	public String getWeek() {
 		return week;
 	}
@@ -59,7 +65,7 @@ public class ShowInWeek {
 		return category;
 	}
 	
-	public int getWeeklyRank() {
+	public String getWeeklyRank() {
 		return weeklyRank;
 	}
 	
@@ -73,5 +79,9 @@ public class ShowInWeek {
 	
 	public int getWeeksInTop10() {
 		return weeksInTop10;
+	}
+	
+	public boolean getPurge() {
+		return purge;
 	}
 }
