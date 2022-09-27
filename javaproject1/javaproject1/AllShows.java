@@ -5,7 +5,7 @@ import java.util.*;
 
 public class AllShows {
 	private int size;
-	private static final int DEFAULT_SIZE = 10;
+	private static final int DEFAULT_SIZE = 100;
 	private ShowInWeek[] showInWeek;
 	private String fileName;
 	Random rand = new Random();
@@ -14,9 +14,8 @@ public class AllShows {
 	Scanner input = new Scanner(System.in);
 
 	public AllShows() {
-		size = 0;
 		showInWeek = new ShowInWeek[DEFAULT_SIZE];
-		fileName = "./project1/netflixTopTenProcessed.txt";
+		fileName = "netflixTopTenProcessed.txt";
 	}
 
 	public void addShow(ShowInWeek s) {
@@ -90,11 +89,12 @@ public class AllShows {
 				String week = lineReader.readLine();
 				String category = lineReader.readLine();
 				String weeklyRank = lineReader.readLine();
+				String showTitle = lineReader.readLine();
 				String seasonTitle = lineReader.readLine();
 				String weeklyHours = lineReader.readLine();
 				String week10 = lineReader.readLine();
 
-				addShow(new ShowInWeek(week, category, weeklyRank, seasonTitle,Integer.parseInt(weeklyHours), Integer.parseInt(week10)));
+				addShow(new ShowInWeek(week, category, weeklyRank, showTitle, seasonTitle,Integer.parseInt(weeklyHours), Integer.parseInt(week10)));
 			}
 		} catch (Exception e) {
 			System.err.println("there was a problem with the file reader, try different read type.");
@@ -105,6 +105,7 @@ public class AllShows {
 					String week = lineReader.readLine();
 					String category = lineReader.readLine();
 					String weeklyRank = lineReader.readLine();
+					String showTitle = lineReader.readLine();
 					String seasonTitle = lineReader.readLine();
 					String weeklyHours = lineReader.readLine();
 					String week10 = lineReader.readLine();
