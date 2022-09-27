@@ -84,4 +84,9 @@ public class ShowInWeek {
 	public boolean getPurge() {
 		return purge;
 	}
+	
+	public String toString() {
+		return week + "\n" + category + "\n" + weeklyRank + "\n" 
+				+ seasonTitle + "\n" + weeklyHours + "\n" +weeksInTop10;
+	}
 }

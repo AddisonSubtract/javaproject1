@@ -6,7 +6,9 @@ public class main {
 		ShowInWeek s1 = new ShowInWeek();
 		AllShows a1 = new AllShows();
 		
-		System.out.println(a1.RandomSuggestion());
+		System.out.println(s1);
+		
+		System.out.println(a1);
 	}
 
 }

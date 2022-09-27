@@ -16,7 +16,7 @@ public class AllShows {
 	public AllShows() {
 		size = 0;
 		showInWeek = new ShowInWeek[DEFAULT_SIZE];
-		fileName = "netflixAllWeeksGlobalProcessed.txt";
+		fileName = "./project1/netflixTopTenProcessed.txt";
 	}
 
 	public void addShow(ShowInWeek s) {
