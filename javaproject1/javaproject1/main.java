@@ -6,7 +6,7 @@ public class main {
 		ShowInWeek s1 = new ShowInWeek("2022-09-04","Films (English)","1","Me Time","N/A",56560000,2);
 		AllShows a1 = new AllShows();
 		
-		//System.out.println(s1);
+		//a1.addShow(s1);
 		
 		System.out.println(a1);
 	}

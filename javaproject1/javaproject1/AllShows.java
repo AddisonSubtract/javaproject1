@@ -16,6 +16,7 @@ public class AllShows {
 	public AllShows() {
 		showInWeek = new ShowInWeek[DEFAULT_SIZE];
 		fileName = "netflixTopTenProcessed.txt";
+		readFile();
 	}
 
 	public void addShow(ShowInWeek s) {
@@ -59,7 +60,7 @@ public class AllShows {
 	
 	public void PredictiveSuggestion(String week) {
 		int count = 0;
-		for(int i = 0; i< 100; i++)
+		for(int i = 0; i < 100; i++)
 		{
 			if(showInWeek[i].getWeek() == week)
 			{
@@ -67,7 +68,7 @@ public class AllShows {
 			}
 		}
 		int random = rand.nextInt((1 - count) + 1) + 1;
-		
+		//TODO
 	}
 
 	public String toString() {
