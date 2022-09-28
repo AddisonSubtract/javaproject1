@@ -4,8 +4,8 @@ import java.io.*;
 import java.util.*;
 
 public class AllShows {
-	private int size;
-	private static final int DEFAULT_SIZE = 100;
+	private int size = 0;
+	private static final int DEFAULT_SIZE = 100000;
 	private ShowInWeek[] showInWeek;
 	private String fileName;
 	Random rand = new Random();
@@ -15,7 +15,7 @@ public class AllShows {
 
 	public AllShows() {
 		showInWeek = new ShowInWeek[DEFAULT_SIZE];
-		fileName = "netflixTopTenProcessed.txt";
+		fileName = "./javaproject1/netflixProcessed.txt";
 		readFile();
 	}
 
@@ -23,41 +23,49 @@ public class AllShows {
 		showInWeek[size] = s;
 		size++;
 	}
-	
+
 	public void purge(String week) {
 		for(ShowInWeek s: showInWeek)
 		{
-			if(s.getWeek() == week)
+			if(s.getWeek().equals(week))
 			{
-				s.setPurge(true);
-			} else {
-				System.out.println("Unable to find show.");
+				s.setWeek("*" + week);
 			}
 		}
 	}
-	
+
 	public void unpurge(String week) {
 		for(ShowInWeek s: showInWeek)
 		{
-			if(s.getWeek() == week)
+			if(s.getWeek().equals("*" + week))
 			{
-				s.setPurge(false);
-			} else {
-				System.out.println("Unable to find show.");
+				s.setWeek(week);
 			}
 		}
 	}
-	
+
 	public String RandomSuggestion() {
+		String zeroMonth = "", zeroDay = "";
 		int year = rand.nextInt((2022 - 2021) + 1) + 2021;
 		int month = rand.nextInt((12 - 1) + 1) + 1;
 		int day = rand.nextInt((31 - 1) + 1) + 1;
-		
-		String week = year + "-" + month + "-" + day;
-		
+
+		if(month < 10) {
+			zeroMonth = "0" + month;
+		}else {
+			zeroMonth += month;
+		}
+		if(day < 10) {
+			zeroDay = "0" + day;
+		}else {
+			zeroDay += day;
+		}
+
+		String week = year + "-" + zeroMonth + "-" + zeroDay;
+
 		return week;
 	}
-	
+
 	public void PredictiveSuggestion(String week) {
 		int count = 0;
 		for(int i = 0; i < 100; i++)
@@ -75,11 +83,15 @@ public class AllShows {
 		String toReturn = null;
 		for(int i = 0; i < size; i++)
 		{
-			toReturn += showInWeek[i] + "\n";
+			if(showInWeek[i].getPurge() == true) {
+				toReturn += "Purged\n";
+			}else {
+				toReturn += showInWeek[i] + "\n";
+			}
 		}
 		return toReturn;
 	}
-	
+
 	private void readFile () {
 		BufferedReader lineReader = null;
 		try {
@@ -87,7 +99,7 @@ public class AllShows {
 			lineReader = new BufferedReader(fr);
 			String line = null;
 			while ((line = lineReader.readLine())!=null) {
-				String week = lineReader.readLine();
+				String week = line;
 				String category = lineReader.readLine();
 				String weeklyRank = lineReader.readLine();
 				String showTitle = lineReader.readLine();
@@ -130,7 +142,7 @@ public class AllShows {
 				}
 		}
 	}
-	
+
 	public void writeFile () {
 		// overloaded method: this calls doWrite with file used to read data
 		// use this for saving data between runs
@@ -153,12 +165,13 @@ public class AllShows {
 
 			for (int i = 0; i < size; i++) {
 				ShowInWeek show = showInWeek[i];
-					myOutfile.write (show.getWeek()+"\n");
-					myOutfile.write (show.getCategory()+"\n");
-					myOutfile.write (show.getWeeklyRank()+"\n");
-					myOutfile.write (show.getSeasonTitle()+"\n");
-					myOutfile.write (show.getWeeklyHours()+"\n");
-					myOutfile.write (show.getWeeksInTop10()+"\n");
+				myOutfile.write (show.getWeek()+"\n");
+				myOutfile.write (show.getCategory()+"\n");
+				myOutfile.write (show.getWeeklyRank()+"\n");
+				myOutfile.write (show.getShowTitle()+"\n");
+				myOutfile.write (show.getSeasonTitle()+"\n");
+				myOutfile.write (show.getWeeklyHours()+"\n");
+				myOutfile.write (show.getWeeksInTop10()+"\n");
 			}
 			myOutfile.flush();
 			myOutfile.close();
