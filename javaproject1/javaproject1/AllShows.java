@@ -15,7 +15,7 @@ public class AllShows {
 
 	public AllShows() {
 		showInWeek = new ShowInWeek[DEFAULT_SIZE];
-		fileName = "./javaproject1/netflixProcessed.txt";
+		fileName = "./javaproject1/netflixProcessed";
 		readFile();
 	}
 
@@ -80,7 +80,7 @@ public class AllShows {
 	}
 
 	public String toString() {
-		String toReturn = null;
+		String toReturn = "";
 		for(int i = 0; i < size; i++)
 		{
 			if(showInWeek[i].getPurge() == true) {
