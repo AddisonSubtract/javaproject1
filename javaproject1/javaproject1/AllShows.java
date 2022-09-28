@@ -6,40 +6,65 @@ import java.util.*;
 public class AllShows {
 	private int size = 0;
 	private static final int DEFAULT_SIZE = 100000;
-	private ShowInWeek[] showInWeek;
+	private ShowInWeek[] allShows;
 	private String fileName;
 	Random rand = new Random();
+	private ArrayList<ShowInWeek> showList;
 
 
 	Scanner input = new Scanner(System.in);
 
 	public AllShows() {
-		showInWeek = new ShowInWeek[DEFAULT_SIZE];
-		fileName = "./javaproject1/netflixProcessed";
+		allShows = new ShowInWeek[DEFAULT_SIZE];
+		showList = new ArrayList<ShowInWeek>();
+		fileName = "./javaproject1/netflixTopTenProcessed.txt";
 		readFile();
 	}
 
 	public void addShow(ShowInWeek s) {
-		showInWeek[size] = s;
+		allShows[size] = s;
+		showList.add(s);
 		size++;
+	}
+	
+	public void getShow(String week) {
+		for(ShowInWeek s: showList)
+		{
+			if(s.getWeek().equals(week))
+			{
+				System.out.println(s.getWeek());
+				System.out.println(s.getCategory());
+				System.out.println(s.getWeeklyRank());
+				System.out.println(s.getShowTitle());
+				System.out.println(s.getSeasonTitle());
+				System.out.println(s.getWeeklyHours());
+				System.out.println(s.getWeeksInTop10());
+				break;
+			}else {
+				System.out.println("Show does not exist, try again.");
+				break;
+			}
+		}
 	}
 
 	public void purge(String week) {
-		for(ShowInWeek s: showInWeek)
+		for(ShowInWeek s: showList)
 		{
 			if(s.getWeek().equals(week))
 			{
 				s.setWeek("*" + week);
+				s.setPurge(true);
 			}
 		}
 	}
 
 	public void unpurge(String week) {
-		for(ShowInWeek s: showInWeek)
+		for(ShowInWeek s: showList)
 		{
-			if(s.getWeek().equals("*" + week))
+			if(s.getPurge() == true)
 			{
 				s.setWeek(week);
+				s.setPurge(false);
 			}
 		}
 	}
@@ -66,27 +91,26 @@ public class AllShows {
 		return week;
 	}
 
-	public void PredictiveSuggestion(String week) {
-		int count = 0;
-		for(int i = 0; i < 100; i++)
+	public String PredictiveSuggestion(ShowInWeek s) {
+		for(int i = 0; i < DEFAULT_SIZE; i++)
 		{
-			if(showInWeek[i].getWeek() == week)
+			if(allShows[i].equals(s))
 			{
-				count++;
+				return allShows[i-1].getWeek();
 			}
 		}
-		int random = rand.nextInt((1 - count) + 1) + 1;
-		//TODO
+		return "Unable to Recommend";
+		
 	}
 
 	public String toString() {
 		String toReturn = "";
 		for(int i = 0; i < size; i++)
 		{
-			if(showInWeek[i].getPurge() == true) {
-				toReturn += "Purged\n";
+			if(allShows[i].getPurge() == true) {
+				toReturn += "\nPurged\n";
 			}else {
-				toReturn += showInWeek[i] + "\n";
+				toReturn += allShows[i] + "\n";
 			}
 		}
 		return toReturn;
@@ -164,7 +188,7 @@ public class AllShows {
 			BufferedWriter myOutfile = new BufferedWriter(fw);			
 
 			for (int i = 0; i < size; i++) {
-				ShowInWeek show = showInWeek[i];
+				ShowInWeek show = allShows[i];
 				myOutfile.write (show.getWeek()+"\n");
 				myOutfile.write (show.getCategory()+"\n");
 				myOutfile.write (show.getWeeklyRank()+"\n");

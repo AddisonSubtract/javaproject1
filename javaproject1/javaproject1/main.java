@@ -14,19 +14,25 @@ public class main {
 		a1.addShow(s2);
 		a1.addShow(s3);
 		
+		System.out.println("First Print");
 		System.out.println(a1);
-		a1.writeFile("./javaproject1/netflixProcessed");
+		//a1.writeFile("./javaproject1/netflixProcessed");
 		
 		
 		System.out.println("\nRandom Suggestion");
 		String randomSug = a1.RandomSuggestion();
-		
 		System.out.println(randomSug);
+		a1.getShow(randomSug);
+		
+		System.out.println("\nPredictive Suggestion");
+		String pred = a1.PredictiveSuggestion(s3);
+		a1.getShow(pred);
 		
 		System.out.println("\nPurge Test");
 		a1.purge("2022-09-05");
 		
 		System.out.println(a1);
+		a1.writeFile("./javaproject1/netflixProcessed");
 	}
 
 }
