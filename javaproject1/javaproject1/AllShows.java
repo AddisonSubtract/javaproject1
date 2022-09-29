@@ -14,6 +14,7 @@ public class AllShows {
 
 	Scanner input = new Scanner(System.in);
 
+	//constructor
 	public AllShows() {
 		allShows = new ShowInWeek[DEFAULT_SIZE];
 		showList = new ArrayList<ShowInWeek>();
@@ -21,12 +22,14 @@ public class AllShows {
 		readFile();
 	}
 
+	//Adds a show to the array
 	public void addShow(ShowInWeek s) {
 		allShows[size] = s;
 		showList.add(s);
 		size++;
 	}
 	
+	//returns a specified show
 	public void getShow(String week) {
 		for(ShowInWeek s: showList)
 		{
@@ -47,6 +50,7 @@ public class AllShows {
 		}
 	}
 
+	//purge a show given the week
 	public void purge(String week) {
 		for(ShowInWeek s: showList)
 		{
@@ -58,6 +62,7 @@ public class AllShows {
 		}
 	}
 
+	//unpurge a show if it it is purged
 	public void unpurge(String week) {
 		for(ShowInWeek s: showList)
 		{
@@ -69,6 +74,7 @@ public class AllShows {
 		}
 	}
 
+	//gives a random show
 	public String RandomSuggestion() {
 		String zeroMonth = "", zeroDay = "";
 		int year = rand.nextInt((2022 - 2021) + 1) + 2021;
@@ -91,6 +97,7 @@ public class AllShows {
 		return week;
 	}
 
+	//predict based on a given show
 	public String PredictiveSuggestion(ShowInWeek s) {
 		for(int i = 0; i < DEFAULT_SIZE; i++)
 		{
@@ -103,6 +110,7 @@ public class AllShows {
 		
 	}
 
+	//prints data in a readable fashion
 	public String toString() {
 		String toReturn = "";
 		for(int i = 0; i < size; i++)
@@ -116,6 +124,7 @@ public class AllShows {
 		return toReturn;
 	}
 
+	//reads textfile
 	private void readFile () {
 		BufferedReader lineReader = null;
 		try {
